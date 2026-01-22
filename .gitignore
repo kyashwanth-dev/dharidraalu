@@ -1,0 +1,15 @@
+# Build artifacts
+*.log
+*.tmp
+.DS_Store
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+Thumbs.db
