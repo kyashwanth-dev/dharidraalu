@@ -1,8 +1,8 @@
-# 🪐 Life on Hard Mode™  
-### (ShaniDev Premium User)
+**Idhi daily episode chadavadaaniki website 👇**  
+👉 [https://naadaridramvinu.onrender.com/](https://naadaridramvinu.onrender.com/)
 
-Welcome to the only GitHub repository where  
-**the bugs are not in the code — they’re in destiny.**
+  Welcome to the only GitHub repository where  
+   **the bugs are not in the code — they’re in destiny.**
 
 I am currently running on:
 
