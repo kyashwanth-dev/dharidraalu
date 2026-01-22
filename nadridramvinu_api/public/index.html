@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>naaDaridramVinu 🐍</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #e5e5e5;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #ff5555;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #aaaaaa;
+      margin-top: 0;
+    }
+
+    .controls {
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    input, button {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      border: 1px solid #333;
+      padding: 0.6rem 1rem;
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #262626;
+    }
+
+    .terminal {
+      background: #000;
+      border: 1px solid #333;
+      padding: 1rem;
+      min-height: 300px;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <h1>🐍 naaDaridramVinu</h1>
+  <p>“Come. Listen to my misfortune.”</p>
+
+  <div class="controls">
+    <button onclick="getRandom()">🎲 Random Unlucky Story</button>
+
+    <input type="date" id="dateInput" />
+    <button onclick="getByDate()">📅 Get By Date</button>
+  </div>
+
+  <div id="output" class="terminal">
+    Waiting for Shani Dev...
+  </div>
+
+  <div class="footer">
+    Life on Hard Mode™ · Fate as an API
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    function render(content) {
+  output.innerHTML = marked.parse(content);
+  output.scrollTop = 0;
+}
+
+    async function getRandom() {
+      render("Fetching random suffering...");
+      try {
+        const res = await fetch("/api/story");
+        const data = await res.json();
+        render(`📅 ${data.date}\n\n${data.content}`);
+      } catch (err) {
+        render("❌ Failed to fetch misfortune");
+      }
+    }
+
+    async function getByDate() {
+      const date = document.getElementById("dateInput").value;
+      if (!date) {
+        render("⚠️ Please select a date first");
+        return;
+      }
+
+      render(`Fetching suffering for ${date}...`);
+
+      try {
+        const res = await fetch(`/api/story?date=${date}`);
+        const data = await res.json();
+
+        if (data.error) {
+          render(`❌ ${data.error}`);
+        } else {
+          render(`📅 ${data.date}\n\n${data.content}`);
+        }
+      } catch (err) {
+        render("❌ Failed to fetch misfortune");
+      }
+    }
+  </script>
+
+</body>
+</html>
